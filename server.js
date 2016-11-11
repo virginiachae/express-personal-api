@@ -73,6 +73,37 @@ app.get('/api/cakes', function apiCakes (req, res) {
   })
 })
 
+//search one cake
+app.get('/api/cakes/:id', function apiCakeWParam(req, res){
+  db.Cake.findOne({
+    _id: req.params.id
+  }, function(err, cake) {
+    res.json(cake);
+  });
+});
+
+//create a new book
+app.post('/api/cakes', function(req, res) {
+    // create new book with form data (`req.body`)
+    var newCake = new db.Cake({
+        name: req.body.name,
+        cake: req.body.cake,
+        frosting: req.body.frosting,
+        description: req.body.description
+    });
+    newCake.save(function(err, cake) {
+          if (err) {
+              return console.log("save error: " + err);
+          }
+          console.log("saved ", cake.title);
+          // send back the book!
+          res.json(cake);
+      });
+  });
+
+
+
+
 /**********
  * SERVER *
  **********/
