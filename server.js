@@ -59,11 +59,19 @@ app.get('/api', function api_index(req, res) {
   })
 });
 
+//displaying my profile on the api endpoint as JSON
 app.get('/api/profile', function apiProfile(req, res) {
   db.Profile.find(function(err, profile) {
     res.json(profile);
   })
 });
+
+//displaying all cakes
+app.get('/api/cakes', function apiCakes (req, res) {
+  db.Cake.find(function(err, cake) {
+    res.json(cake);
+  })
+})
 
 /**********
  * SERVER *
